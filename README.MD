@@ -1,8 +1,46 @@
-# Amazin – Vulnerable E-commerce Web App
+# ⚡ Amazin – Vulnerable E-Commerce Web Application  
+![Status](https://img.shields.io/badge/Project-Intentionally%20Vulnerable-red?style=for-the-badge)
+![Language](https://img.shields.io/badge/PHP-8.x-blue?style=for-the-badge)
+![Database](https://img.shields.io/badge/SQLite-Included-lightgrey?style=for-the-badge)
+![WAF](https://img.shields.io/badge/WAF-Built--In-success?style=for-the-badge)
+![Education](https://img.shields.io/badge/Purpose-Security%20Training-orange?style=for-the-badge)
 
-**Amazin** is a deliberately insecure PHP-based storefront built for hands-on security testing and learning.
+Amazin is a purposely vulnerable PHP-based online store built for **penetration testing**, **web security training**, and **demo purposes**.  
+It mimics a real e-commerce platform — except the vulnerabilities are intentional.
 
-It mimics a real online store and includes common web vulnerabilities:
+> ⚠️ **Never deploy this publicly.** Local lab use only.
+
+---
+
+# 📚 Table of Contents
+
+- [✨ Overview](#-overview)
+- [🕳️ Vulnerabilities Included](#️-vulnerabilities-included)
+- [🛠️ Setup Guide (Windows + PHP + SQLite)](#️-setup-guide-windows--php--sqlite)
+- [🔓 Making the App Vulnerable](#making-the-app-vulnerable)
+- [🔑 Default Credentials](#-default-credentials)
+- [🛡 Built-In Web Application Firewall (WAF)](#-built-in-web-application-firewall-waf)
+- [📁 WAF Log Viewer](#-waf-log-viewer)
+- [⚠️ Known Limitations](#️-known-limitations)
+- [📛 Legal Notice](#-legal-notice)
+
+---
+
+# ✨ Overview
+
+Amazin simulates a simple online storefront with users, uploads, and admin features.  
+It's intentionally designed to demonstrate:
+
+- exploitation (insecure state)  
+- mitigation (secured state using WAF)
+
+The integrated WAF lets you switch between **vulnerable** and **protected** modes instantly.
+
+---
+
+# 🕳️ Vulnerabilities Included
+
+The application intentionally includes:
 
 - SQL Injection (SQLi)
 - Stored Cross-Site Scripting (XSS)
@@ -14,97 +52,138 @@ It mimics a real online store and includes common web vulnerabilities:
 - CSRF
 - Weak Authentication
 
-> ⚠️ This app is intentionally vulnerable. Do **not** expose it to the internet or use it in production.
+Each vulnerability behaves like it would in a real insecure PHP app.
 
 ---
 
-## 🔧 Setup (PHP + SQLite)
+# 🛠️ Setup Guide (Windows + PHP + SQLite)
 
-1. Install PHP for your OS.
-2. Enable SQLite extensions:
-   - Open `php.ini` (e.g. `C:\php\php.ini`)
-   - Uncomment or add:
+## 1. Install PHP (Windows)
 
-     ```
-     extension=pdo_sqlite
-     extension=sqlite3
-     ```
+Download PHP from the official Windows downloads page:
 
-3. Extract VWA.rar
+👉 **https://windows.php.net/download/**
 
-4. Open Terminal inside the directory then paste this:
+Extract PHP, then:
 
-   ```bash
-   php -S localhost:8000
+- Duplicate `php.ini-development` → rename to `php.ini`
+- Enable SQLite modules:
 
+```ini
+extension=pdo_sqlite
+extension=sqlite3
+2. Extract the project
+Unzip the folder (e.g., AmazinVulnShop).
 
-Then open http://localhost:8000 in your browser.
+3. Start the development server
+Run this inside the folder:
 
-### See Vulnerabilities Included  
-Payloads, example URLs, and prevention tips for each flaw.
+bash
+Copy code
+php -S localhost:8000
+Open the site:
 
----
+👉 http://localhost:8000
 
-### 🧪 Default Credentials  
-- **Admin**  
-  - Username: `admin`  
-  - Password: `admin`  
+🔓 Making the App Vulnerable
+The app ships with the WAF turned ON by default (BLOCK mode).
+This means attacks are blocked unless you disable the firewall.
 
-- **User1**  
-  - Username: `michael`  
-  - Password: `michael`  
+To enable full vulnerability mode:
 
-- **User2**  
-  - Username: `john`  
-  - Password: `john`  
+Login as admin
 
----
+Open the Admin Dashboard
 
-### ⚠️ Known Limitations  
-- UI is not responsive  
-- Optimized for 1920x1080 (Full HD) screens, Zoom the webpage until it fits your screen properly.
-- May break on smaller or mobile displays  
+Change WAF Mode → OFF
 
----
+All vulnerabilities become active again
 
-### 📛 Legal  
-- Not affiliated with Amazon  
-- Logos, names, and branding are parodies  
-- For ethical, educational use only
+Use this to demo before/after scenarios.
 
+🔑 Default Credentials
+👑 Admin
+Username: admin
 
-## 🔍 Vulnerabilities Included
+Password: admin
 
-This app includes several intentionally insecure features for training purposes. Here are examples, how to trigger them, and how to prevent them:
+👤 User Accounts
+michael / michael
 
-### 1. SQL Injection
-- **Example Payload:** `admin' --`
-- **Prevention:** Use prepared statements with parameterized queries to sanitize inputs and block SQL injection.
+john / john
 
-### 2. Stored Cross-Site Scripting (XSS)
-- **Payload:** `<script>alert("XSS");</script>`
-- **Prevention:** Escape output with `htmlspecialchars()` and validate/sanitize inputs to reject scripts.
+🛡 Built-In Web Application Firewall (WAF)
+This fork includes a lightweight, fully integrated WAF (waf.php) that intercepts every request.
 
-### 3. Broken Access Control
-- **Example:** Visit `http://localhost:8000/users.php` without logging in.
-- **Bonus:** `robots.txt` exposes paths like `/users.php`, `/uploads/`
-- **Prevention:** Add session checks to protect sensitive pages. Avoid listing sensitive routes in `robots.txt`.
+🌐 Default Behavior
+WAF is ON by default
 
-### 4. Unrestricted File Upload
-- **Example Upload:** `info.php`
-- **Test URL:** `http://localhost:8000/uploads/info.php`
-- **Prevention:** Validate file types, use `basename()` to block directory traversal, and store uploads outside the web root.
+Mode = BLOCK
 
-### 5. Remote Code Execution (RCE)
-- **Example Upload:** `shell.php`
-- **Test URL:** `http://localhost:8000/uploads/shell.php?cmd=dir`
-- **Prevention:** Disable PHP execution in upload folders (e.g. via `.htaccess`), sanitize user input, and avoid using `eval()` or `system()` on raw data.
+Attacks are blocked with a styled WAF block page
 
-### 6. Insecure Direct Object Reference (IDOR)
-- **Example:** `http://localhost:8000/profile.php?id=1`
-- **Prevention:** Verify user ownership with session checks before exposing data tied to IDs. Prefer indirect references.
+All events logged to /waf_logs/waf.log
 
-### 7. Sensitive Data Exposure
-- **Example:** `http://localhost:8000/login.php?username=admin&password=admin`
-- **Prevention:** Use `method="POST"` instead of GET for forms. Never log plaintext passwords. Hash with `password_hash()`.
-...
+Toggle modes via Admin Dashboard
+
+⚙️ WAF Modes
+Mode	Description
+BLOCK	Blocks & logs attacks
+DETECT	Logs only (no blocking)
+OFF	App becomes fully vulnerable
+
+🧠 WAF Provides Protection Against:
+SQL Injection payloads
+
+XSS vectors (<script>, onerror=, javascript:)
+
+Command injection attempts
+
+Execution of uploaded .php files
+
+Unsafe file uploads (only jpg/jpeg/png allowed when WAF is ON)
+
+IDOR on profile.php?id=
+
+GET-based credential leaks
+
+Admin/user dashboard access restrictions
+
+The WAF exists for demonstration — not for real security.
+
+📁 WAF Log Viewer
+The Admin Dashboard includes a WAF Logs section showing the latest 50 events, including:
+
+Timestamp
+
+Rule ID
+
+Block reason
+
+Requested URI
+
+IP address
+
+Raw logs live here:
+
+bash
+Copy code
+/waf_logs/waf.log
+Great for teaching intrusion detection and viewing real-time attack attempts.
+
+⚠️ Known Limitations
+Not responsive
+
+Designed for 1920×1080 (Full HD)
+
+WAF is intentionally simple (regex-based)
+
+Educational/CTF tool, not production software
+
+📛 Legal Notice
+Not affiliated with Amazon
+
+Branding & names are parodies
+
+For ethical and educational use only
+
