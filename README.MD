@@ -88,17 +88,17 @@ Use this to demo before/after scenarios.
 This project includes a lightweight, fully integrated WAF (waf.php) that intercepts every request.
 
  **🌐 Default Behavior** <br> 
-WAF is ON by default
-Mode = BLOCK
-Attacks are blocked with a styled WAF block page
-All events logged to /waf_logs/waf.log
-Toggle modes via Admin Dashboard
+WAF is ON by default <br> 
+Mode = BLOCK <br> 
+Attacks are blocked with a styled WAF block page <br> 
+All events logged to /waf_logs/waf.log <br> 
+Toggle modes via Admin Dashboard <br> 
 
 **⚙️ WAF Modes** <br> 
-Mode	Description
-BLOCK	Blocks & logs attacks
-DETECT	Logs only (no blocking)
-OFF	App becomes fully vulnerable
+Mode	Description <br> 
+BLOCK	Blocks & logs attacks <br> 
+DETECT	Logs only (no blocking) <br> 
+OFF	App becomes fully vulnerable <br> 
 
 
 ## 🧠 WAF Provides Protection Against:
@@ -179,6 +179,7 @@ This app includes several intentionally insecure features for training purposes.
 ### 7. Sensitive Data Exposure
 - **Example:** `http://localhost:8000/login.php?username=admin&password=admin`
 - **Prevention:** Use `method="POST"` instead of GET for forms. Never log plaintext passwords. Hash with `password_hash()`.
+
 
 
 
