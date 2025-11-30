@@ -52,7 +52,7 @@ then,
 
 - Duplicate `php.ini-development` → rename to `php.ini`
 - Open `php.ini`
-- Enable SQLite modules:
+- Enable SQLite modules: <br>
 **extension=pdo_sqlite** <br> **extension=sqlite3**
 
 2. Unzip the folder **AmazinVulnShop.zip**
@@ -179,6 +179,7 @@ This app includes several intentionally insecure features for training purposes.
 ### 7. Sensitive Data Exposure
 - **Example:** `http://localhost:8000/login.php?username=admin&password=admin`
 - **Prevention:** Use `method="POST"` instead of GET for forms. Never log plaintext passwords. Hash with `password_hash()`.
+
 
 
 
