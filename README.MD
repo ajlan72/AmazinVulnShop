@@ -1,5 +1,5 @@
 
-# ⚡ Amazin – Vulnerable E-Commerce Web Application  
+# Amazin – Vulnerable E-Commerce Web Application  
 ![Status](https://img.shields.io/badge/Project-Intentionally%20Vulnerable-red?style=for-the-badge)
 ![Language](https://img.shields.io/badge/PHP-8.x-blue?style=for-the-badge)
 ![Database](https://img.shields.io/badge/SQLite-Included-lightgrey?style=for-the-badge)
@@ -11,21 +11,6 @@ It mimics a real e-commerce platform — except the vulnerabilities are intentio
 
 > ⚠️ **Never deploy this publicly.** Local lab use only.
 
----
-
-# 📚 Table of Contents
-
-- [✨ Overview](#-overview)
-- [🕳️ Vulnerabilities Included](#️-vulnerabilities-included)
-- [🛠️ Setup Guide (Windows + PHP + SQLite)](#️-setup-guide-windows--php--sqlite)
-- [🔓 Making the App Vulnerable](#making-the-app-vulnerable)
-- [🔑 Default Credentials](#-default-credentials)
-- [🛡 Built-In Web Application Firewall (WAF)](#-built-in-web-application-firewall-waf)
-- [📁 WAF Log Viewer](#-waf-log-viewer)
-- [⚠️ Known Limitations](#️-known-limitations)
-- [📛 Legal Notice](#-legal-notice)
-
----
 
 # ✨ Overview
 
@@ -39,7 +24,7 @@ The integrated WAF lets you switch between **vulnerable** and **protected** mode
 
 ---
 
-## 🕳️ The Application Intentionally Includes:
+## 🕳️ The Application Intentionally Includes
 
 - SQL Injection (SQLi)
 - Stored Cross-Site Scripting (XSS)
@@ -70,8 +55,7 @@ then,
 - Open `php.ini`
 - Enable SQLite modules:
 
-**extension=pdo_sqlite**
-**extension=sqlite3**
+**extension=pdo_sqlite** <br> **extension=sqlite3**
 
 2. Unzip the folder **AmazinVulnShop.zip**
 
@@ -99,24 +83,20 @@ Use this to demo before/after scenarios.
 
 ## 🔑 Default Credentials
 
-**👑 Admin**
-Username: `admin` | Password: ` admin`
-**👤 User Accounts**
-Username: `michael` | Password: ` michael`
-Username: `john` | Password: ` john `
+**👑 Admin**  <br> Username: `admin` | Password: ` admin`  <br> **👤 User Accounts**  <br> Username: `michael` | Password: ` michael` <br> Username: `john` | Password: ` john `
 
 
 ## 🛡 Built-In Web Application Firewall (WAF)
 This project includes a lightweight, fully integrated WAF (waf.php) that intercepts every request.
 
- **🌐 Default Behavior**
+ **🌐 Default Behavior** <br> 
 WAF is ON by default
 Mode = BLOCK
 Attacks are blocked with a styled WAF block page
 All events logged to /waf_logs/waf.log
 Toggle modes via Admin Dashboard
 
-**⚙️ WAF Modes**
+**⚙️ WAF Modes** <br> 
 Mode	Description
 BLOCK	Blocks & logs attacks
 DETECT	Logs only (no blocking)
@@ -133,7 +113,7 @@ OFF	App becomes fully vulnerable
 - GET-based credential leaks
 - Admin/user dashboard access restrictions
 
-The WAF exists for demonstration — not for real security.
+The WAF exists for demonstration, not for real security.
 
 ## 📁 WAF Log Viewer
 
@@ -150,9 +130,8 @@ Raw logs live here:
 
 Great for teaching intrusion detection and viewing real-time attack attempts.
 
----
 
-# ⚠️ Known Limitations
+## ⚠️ Known Limitations
 - Not responsive
 -  Optimized for 1920x1080 (Full HD) screens, Zoom the webpage until it fits your screen properly.
 -  May break on smaller or mobile displays
@@ -164,7 +143,7 @@ Great for teaching intrusion detection and viewing real-time attack attempts.
 - Logos, names, and branding are parodies  
 - For ethical, educational use only
 
-## 🔍 Vulnerabilities Included
+# 🔍 Vulnerabilities Included
 
 This app includes several intentionally insecure features for training purposes. Here are examples, how to trigger them, and how to prevent them:
 
@@ -198,4 +177,5 @@ This app includes several intentionally insecure features for training purposes.
 ### 7. Sensitive Data Exposure
 - **Example:** `http://localhost:8000/login.php?username=admin&password=admin`
 - **Prevention:** Use `method="POST"` instead of GET for forms. Never log plaintext passwords. Hash with `password_hash()`.
+
 
